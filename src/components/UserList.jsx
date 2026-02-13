@@ -3,11 +3,11 @@ import { useEffect, useState } from "react";
 export default function UserList() {
     const [users, setUsers] = useState([]);
 
-    // State for the Edit Modal
+
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [editingUser, setEditingUser] = useState(null);
 
-    // State for Adding a New User (Backend requires username!)
+
     const [newUser, setNewUser] = useState({
         username: "",
         email: "",
@@ -18,7 +18,7 @@ export default function UserList() {
 
     const API_URL = import.meta.env.VITE_API_URL;
 
-    // --- 1. FETCH USERS ---
+
     useEffect(() => {
         fetchUsers();
     }, []);
@@ -35,7 +35,7 @@ export default function UserList() {
         }
     }
 
-    // --- 2. DELETE USER ---
+
     async function handleDelete(id) {
         if (!confirm("Are you sure you want to delete this user?")) return;
         try {
@@ -46,7 +46,7 @@ export default function UserList() {
         }
     }
 
-    // --- 3. EDIT MODAL FUNCTIONS ---
+
     function openEditModal(user) {
         setEditingUser(user);
         setIsModalOpen(true);
@@ -81,14 +81,14 @@ export default function UserList() {
         }
     }
 
-    // --- 4. ADD NEW USER FUNCTIONS (NEW) ---
+
     function handleNewUserChange(e) {
         const { name, value } = e.target;
         setNewUser(prev => ({ ...prev, [name]: value }));
     }
 
     async function handleAddUser() {
-        // Validation: Backend strictly requires username, email, and password
+
         if (!newUser.username || !newUser.email || !newUser.password) {
             alert("Please fill in all required fields (Username, Email, Password)");
             return;
@@ -103,9 +103,9 @@ export default function UserList() {
 
             if (res.ok) {
                 alert("User added successfully!");
-                // Clear the form
+
                 setNewUser({ username: "", email: "", password: "", firstname: "", lastname: "" });
-                // Refresh the list to show the new user
+
                 fetchUsers();
             } else {
                 const errorData = await res.json();
@@ -116,12 +116,12 @@ export default function UserList() {
         }
     }
 
-    // --- HTML DISPLAY ---
+
     return (
         <div style={{ padding: "20px", fontFamily: "Arial, sans-serif" }}>
             <h2>User Management</h2>
 
-            {/* Existing Table */}
+
             <table border="1" cellPadding="10" style={{ width: '100%', borderCollapse: 'collapse', marginBottom: '30px' }}>
                 <thead style={{ backgroundColor: "#f4f4f4" }}>
                     <tr>
@@ -148,7 +148,7 @@ export default function UserList() {
                 </tbody>
             </table>
 
-            {/* --- NEW ADD USER FORM --- */}
+
             <div style={{ padding: "20px", backgroundColor: "#f9f9f9", border: "1px solid #ddd", borderRadius: "8px" }}>
                 <h3>Add New User</h3>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))", gap: "10px", marginBottom: "15px" }}>
@@ -169,7 +169,7 @@ export default function UserList() {
                 </button>
             </div>
 
-            {/* --- EDIT POPUP WINDOW (Unchanged) --- */}
+
             {isModalOpen && (
                 <div style={{
                     position: "fixed", top: 0, left: 0, width: "100%", height: "100%",
