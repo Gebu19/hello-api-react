@@ -1,6 +1,5 @@
 import { useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
-import TestAPI from './components/testApi'
 import Item from './components/item'
 import { Items } from './components/item1'
 import { ItemDetail } from './components/itemDetail'
@@ -16,7 +15,8 @@ function App() {
 
   return (
     <Routes>
-      <Route path='/test_api' element={<TestAPI />} />
+      {/*
+      <Route path='/test_api' element={<TestAPI />} />*/}
       <Route path='/items' element={<Items />} />
       <Route path='/items/:id' element={<ItemDetail />} />
       <Route path='/login' element={<Login />} />
